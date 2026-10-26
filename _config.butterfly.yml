@@ -15,6 +15,7 @@ menu:
   大学履历: /experience/ || fas fa-images
   关于我: /about/ || fas fa-user
   归档: /archives/ || fas fa-archive
+  分类: /categories/ || fas fa-folder-open
   标签: /tags/ || fas fa-tags
 
 # ---------- 社交图标 ----------
