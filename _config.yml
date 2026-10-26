@@ -1,0 +1,103 @@
+# ============================================================
+# Hexo 主配置 - 小康博客
+# 文档：https://hexo.io/zh-cn/docs/configuration
+# ============================================================
+
+# 站点信息
+title: 小康博客
+subtitle: '岁岁平，岁岁安，岁岁平安'
+description: '张康博的个人博客：记录学习动态、项目实践与大学经历。'
+keywords: '小康博客,张康博,个人博客,移动应用开发,HarmonyOS,Hexo,前端'
+author: 张康博
+language: zh-CN
+timezone: 'Asia/Shanghai'
+
+# 网址
+# 使用 zhkb06.github.io 仓库时，站点地址就是根域名，root 保持 /
+url: https://zhkb06.github.io
+root: /
+permalink: :year/:month/:day/:title/
+permalink_defaults:
+pretty_urls:
+  trailing_index: true
+  trailing_html: true
+
+# 目录
+source_dir: source
+public_dir: public
+tag_dir: tags
+archive_dir: archives
+category_dir: categories
+code_dir: downloads/code
+i18n_dir: ':lang'
+skip_render:
+
+# 写作
+new_post_name: :title.md
+default_layout: post
+titlecase: false
+external_link:
+  enable: true
+  field: site
+  exclude:
+filename_case: 0
+render_drafts: false
+post_asset_folder: true
+relative_link: false
+future: true
+
+# 代码高亮交给主题（Butterfly 自带），关闭 Hexo 内置高亮
+highlight:
+  enable: false
+  line_number: false
+  auto_detect: false
+  tab_replace: ''
+  wrap: true
+  hljs: false
+prismjs:
+  enable: false
+  preprocess: true
+  line_number: true
+  tab_replace: ''
+
+# 首页分页
+index_generator:
+  path: ''
+  per_page: 8
+  order_by: -date
+
+default_category: uncategorized
+category_map:
+tag_map:
+
+# 日期格式
+date_format: YYYY-MM-DD
+time_format: HH:mm:ss
+updated_option: 'mtime'
+
+# 分页
+per_page: 10
+pagination_dir: page
+
+include:
+exclude:
+ignore:
+
+# 主题
+theme: butterfly
+
+# 本地搜索（配合 Butterfly 的 local_search）
+search:
+  path: search.xml
+  field: post
+  content: true
+  format: html
+
+# 部署
+# 本站采用 GitHub Actions 自动构建发布（见 .github/workflows/pages.yml），
+# 这里留空。若改用 hexo deploy 手动发布，填写：
+#   type: git
+#   repo: git@github.com:zhkb06/zhkb06.github.io.git
+#   branch: main
+deploy:
+  type: ''
