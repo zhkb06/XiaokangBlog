@@ -19,6 +19,7 @@ XiaokangBlog-hexo/
 │   ├── about/               关于我（页面）
 │   ├── experience/          大学履历（页面，含 8 组照片墙）
 │   ├── tags/                标签页
+│   ├── categories/          分类页（type: categories）
 │   ├── 404.md               404 页面
 │   ├── css/custom.css       自定义样式（照片墙、信息表等）
 │   └── images/              全站图片（photos/ 为履历照片）
@@ -104,11 +105,26 @@ tags: [Hexo, 前端]
 | 照片墙样式 | `source/css/custom.css` |
 | 关于我 / 大学履历 | `source/about/`、`source/experience/` |
 
+## 上线状态（2026-10-26 验证）
+
+| 项 | 状态 |
+| --- | --- |
+| HTTPS 证书 | Let's Encrypt 签发，`CN=blog.xiaokangblog.dpdns.org` |
+| HTTP → HTTPS | 301 强制跳转 |
+| 旧地址跳转 | `zhkb06.github.io/XiaokangBlog/` → 301 → 新域名 |
+| 全站页面 | 首页、关于我、大学履历、归档、标签、分类、2 篇文章、search.xml、404 全部 200 |
+| 照片资源 | 29 张全部 200 |
+| 首页本地资源 | 24 个全部 200 |
+
 ## 注意
 
 - 已绑定自定义域名 `blog.xiaokangblog.dpdns.org`，站点服务在域名根路径：`url` 填完整域名，`root` 为 `/`
+- 域名只写在 **Settings → Pages → Custom domain** 里；用 Actions 部署时仓库根目录的 `CNAME` 文件会被忽略，不要靠它绑定域名
 - Markdown 里照常写根路径图片 `/images/xxx.jpg` 即可；若将来改回子路径部署（`root: /XiaokangBlog/`），`scripts/root-path.js` 会自动补前缀
-- 域名解析在 Cloudflare 管理：`blog` → CNAME → `zhkb06.github.io`（先灰云，证书签发后可开橙云）
+- 域名解析在 Cloudflare 管理：`blog` → CNAME → `zhkb06.github.io`，**保持灰云（DNS only）**
+- `www.xiaokangblog.dpdns.org` 不是 GitHub Pages 认的域名（它只认 Settings 里那一个 + `zhkb06.github.io`），指向 GitHub 会返回 404。需要 www 跳转时用 Cloudflare Redirect Rules 配 301，不要把 www 直接 CNAME 到 GitHub
+- 不要手动在 Cloudflare 里加 zone 内的 NS 记录（DigitalPlat 会留 `ns1/ns2.digitalplat.org` 残留），真实委派是 `ines/rommy.ns.cloudflare.com`，Cloudflare 应答时会覆盖掉这些记录
 - `node_modules/`、`public/` 已在 `.gitignore` 中，不要提交
 - 主题通过 npm 安装（`hexo-theme-butterfly`），不需要放在 `themes/` 目录
 - 页脚含手机号，仓库为公开仓库时该信息会一并公开
+- 全站唯一的外部依赖是 `cdn.jsdelivr.net`（第三方库）和 `busuanzi.ibruce.info`（访问统计），其余资源全部本地托管
