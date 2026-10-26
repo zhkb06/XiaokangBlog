@@ -2,7 +2,7 @@
 
 张康博的个人博客。Hexo 7 + Butterfly 5，内容用 Markdown 写，推送到 GitHub 后由 GitHub Actions 自动构建并发布到 GitHub Pages。
 
-- 线上地址：https://zhkb06.github.io
+- 线上地址：https://zhkb06.github.io/XiaokangBlog/
 - 本地预览：`npm run server` → http://localhost:4000
 
 ## 目录结构
@@ -22,7 +22,8 @@ XiaokangBlog-hexo/
 │   ├── 404.md               404 页面
 │   ├── css/custom.css       自定义样式（照片墙、信息表等）
 │   └── images/              全站图片（photos/ 为履历照片）
-├── tools/optimize-one.js    图片压缩（配合 npm run img）
+├── scripts/root-path.js     子路径适配（自动补 /XiaokangBlog/ 前缀）
+├── tools/optimize-one.js    图片压缩
 └── .github/workflows/pages.yml  GitHub Actions 自动发布
 ```
 
@@ -66,7 +67,7 @@ tags: [Hexo, 前端]
 
 当前方案：**推送源码 → GitHub Actions 自动构建 → 发布到 Pages**。
 
-1. 把本项目推到仓库 `zhkb06/zhkb06.github.io`（main 分支）
+1. 把本项目推到仓库 `zhkb06/XiaokangBlog`（main 分支）
 2. 仓库 **Settings → Pages → Build and deployment → Source** 选择 **GitHub Actions**
 3. 之后每次 `git push` 都会自动构建发布，约 1–2 分钟生效
 4. 查看构建日志：仓库 **Actions** 页签
@@ -81,7 +82,7 @@ tags: [Hexo, 前端]
    ```yaml
    deploy:
      type: git
-     repo: https://github.com/zhkb06/zhkb06.github.io.git
+     repo: https://github.com/zhkb06/XiaokangBlog.git
      branch: gh-pages
    ```
 2. 安装发布插件：`npm install hexo-deployer-git`
@@ -105,6 +106,9 @@ tags: [Hexo, 前端]
 
 ## 注意
 
+- 站点部署在**子路径** `/XiaokangBlog/` 下，`_config.yml` 的 `url` 与 `root` 必须和仓库名一致
+- Markdown 里照常写根路径图片 `/images/xxx.jpg` 即可，`scripts/root-path.js` 会在渲染后自动补上 `root` 前缀
+- 以后若改用 `<用户名>.github.io` 仓库或绑定自定义域名，只需把 `root` 改成 `/`，脚本会自动跳过
 - `node_modules/`、`public/` 已在 `.gitignore` 中，不要提交
 - 主题通过 npm 安装（`hexo-theme-butterfly`），不需要放在 `themes/` 目录
 - 页脚含手机号，仓库为公开仓库时该信息会一并公开

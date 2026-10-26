@@ -13,9 +13,10 @@ language: zh-CN
 timezone: 'Asia/Shanghai'
 
 # 网址
-# 使用 zhkb06.github.io 仓库时，站点地址就是根域名，root 保持 /
-url: https://zhkb06.github.io
-root: /
+# 仓库名为 XiaokangBlog（项目页），站点地址为 https://zhkb06.github.io/XiaokangBlog/
+# 若以后把仓库改名为 zhkb06.github.io（用户主页），把 url 改为 https://zhkb06.github.io、root 改为 /
+url: https://zhkb06.github.io/XiaokangBlog
+root: /XiaokangBlog/
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
