@@ -95,3 +95,14 @@
   border-left: 4px solid #4169E1;
   margin: 30px 0 6px;
 }
+
+/* ---------- 首页头图：手机端再压低一些 ---------- */
+@media screen and (max-width: 768px) {
+  #page-header.full_page {
+    height: 52vh;
+  }
+
+  #page-header.full_page #site-info {
+    top: 45%;
+  }
+}

@@ -37,6 +37,12 @@ archive_img: /images/background.jpg
 tag_img: /images/background.jpg
 category_img: /images/background.jpg
 
+# 首页头图高度。主题默认 100vh（占满一整屏，首屏看不到文章列表）
+# 这里改成 62vh，首屏能看到头图 + 第一篇文章的开头
+index_top_img_height: 62vh
+# 站点标题离顶部的距离（不填默认 43%）
+index_site_info_top: 43%
+
 cover:
   index_enable: true
   aside_enable: true
