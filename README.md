@@ -2,7 +2,7 @@
 
 张康博的个人博客。Hexo 7 + Butterfly 5，内容用 Markdown 写，推送到 GitHub 后由 GitHub Actions 自动构建并发布到 GitHub Pages。
 
-- 线上地址：https://zhkb06.github.io/XiaokangBlog/
+- 线上地址：https://blog.xiaokangblog.dpdns.org/
 - 本地预览：`npm run server` → http://localhost:4000
 
 ## 目录结构
@@ -106,9 +106,9 @@ tags: [Hexo, 前端]
 
 ## 注意
 
-- 站点部署在**子路径** `/XiaokangBlog/` 下，`_config.yml` 的 `url` 与 `root` 必须和仓库名一致
-- Markdown 里照常写根路径图片 `/images/xxx.jpg` 即可，`scripts/root-path.js` 会在渲染后自动补上 `root` 前缀
-- 以后若改用 `<用户名>.github.io` 仓库或绑定自定义域名，只需把 `root` 改成 `/`，脚本会自动跳过
+- 已绑定自定义域名 `blog.xiaokangblog.dpdns.org`，站点服务在域名根路径：`url` 填完整域名，`root` 为 `/`
+- Markdown 里照常写根路径图片 `/images/xxx.jpg` 即可；若将来改回子路径部署（`root: /XiaokangBlog/`），`scripts/root-path.js` 会自动补前缀
+- 域名解析在 Cloudflare 管理：`blog` → CNAME → `zhkb06.github.io`（先灰云，证书签发后可开橙云）
 - `node_modules/`、`public/` 已在 `.gitignore` 中，不要提交
 - 主题通过 npm 安装（`hexo-theme-butterfly`），不需要放在 `themes/` 目录
 - 页脚含手机号，仓库为公开仓库时该信息会一并公开
