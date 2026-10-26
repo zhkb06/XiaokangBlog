@@ -115,14 +115,20 @@ tags: [Hexo, 前端]
 | 全站页面 | 首页、关于我、大学履历、归档、标签、分类、2 篇文章、search.xml、404 全部 200 |
 | 照片资源 | 29 张全部 200 |
 | 首页本地资源 | 24 个全部 200 |
+| 裸域 / www 跳转 | `xiaokangblog.dpdns.org` 与 `www.xiaokangblog.dpdns.org` → 301 → `https://blog.xiaokangblog.dpdns.org/`（路径与查询参数均保留） |
 
 ## 注意
 
 - 已绑定自定义域名 `blog.xiaokangblog.dpdns.org`，站点服务在域名根路径：`url` 填完整域名，`root` 为 `/`
 - 域名只写在 **Settings → Pages → Custom domain** 里；用 Actions 部署时仓库根目录的 `CNAME` 文件会被忽略，不要靠它绑定域名
 - Markdown 里照常写根路径图片 `/images/xxx.jpg` 即可；若将来改回子路径部署（`root: /XiaokangBlog/`），`scripts/root-path.js` 会自动补前缀
-- 域名解析在 Cloudflare 管理：`blog` → CNAME → `zhkb06.github.io`，**保持灰云（DNS only）**
-- `www.xiaokangblog.dpdns.org` 不是 GitHub Pages 认的域名（它只认 Settings 里那一个 + `zhkb06.github.io`），指向 GitHub 会返回 404。需要 www 跳转时用 Cloudflare Redirect Rules 配 301，不要把 www 直接 CNAME 到 GitHub
+- 域名解析在 Cloudflare 管理，**两条记录分工不能搞混**：
+  - `blog` → CNAME → `zhkb06.github.io`，**必须灰云 DNS only**。开橙云会让 GitHub 的证书续期（HTTP-01 验证）失败，三个月后 HTTPS 全挂
+  - `@` / `www` → A → `192.0.2.1`，**必须橙云 Proxied**。这是 RFC 5737 文档专用地址，故意不可达，只为了让 Redirect Rule 能在边缘拦下请求
+- 裸域与 www 的跳转靠 Cloudflare **Rules → Redirect Rules** 一条规则实现：
+  - 筛选：`(http.host eq "xiaokangblog.dpdns.org") or (http.host eq "www.xiaokangblog.dpdns.org")`
+  - 重定向：Dynamic，`concat("https://blog.xiaokangblog.dpdns.org", http.request.uri.path)`，301，勾选保留查询参数
+  - 排查技巧：如果访问裸域返回 **522**，说明规则没匹配上，Cloudflare 去连 `192.0.2.1` 超时了，回去检查筛选表达式
 - 不要手动在 Cloudflare 里加 zone 内的 NS 记录（DigitalPlat 会留 `ns1/ns2.digitalplat.org` 残留），真实委派是 `ines/rommy.ns.cloudflare.com`，Cloudflare 应答时会覆盖掉这些记录
 - `node_modules/`、`public/` 已在 `.gitignore` 中，不要提交
 - 主题通过 npm 安装（`hexo-theme-butterfly`），不需要放在 `themes/` 目录
